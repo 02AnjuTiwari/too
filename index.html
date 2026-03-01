@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SurpriseNest - Gift Delivery Nepal</title>
+
+<meta name="keywords" content="Gift delivery in Butwal, Birthday gift online Nepal, Surprise gift delivery, Anniversary gift Nepal">
+
+<style>
+body{
+    font-family: Arial;
+    margin:0;
+    background:#fff4f8;
+}
+
+header{
+    background:#ff4d88;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+select,button{
+    width:100%;
+    padding:8px;
+    margin-top:8px;
+}
+
+button{
+    background:#ff4d88;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+.cart{
+    background:white;
+    margin:20px;
+    padding:20px;
+    border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🎁 SurpriseNest</h1>
+<p>Best Gift Delivery in Nepal</p>
+</header>
+
+<section class="products">
+
+<!-- CAKE -->
+<div class="card">
+<img id="cakeImg" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587">
+<h3>🎂 Birthday Cake</h3>
+<p>Base Price: NPR 1500</p>
+
+<select id="cakeFlavor" onchange="changeCakeImage()">
+<option value="chocolate">Chocolate</option>
+<option value="vanilla">Vanilla</option>
+<option value="redvelvet">Red Velvet (+200)</option>
+</select>
+
+<button onclick="addCake()">Add to Cart</button>
+</div>
+
+<!-- FLOWERS -->
+<div class="card">
+<img id="flowerImg" src="https://images.unsplash.com/photo-1526045612212-70caf35c14df">
+<h3>💐 Flower Bouquet</h3>
+<p>Base Price: NPR 1000</p>
+
+<select id="flowerType" onchange="changeFlowerImage()">
+<option value="natural">Natural</option>
+<option value="artificial">Artificial (-200)</option>
+</select>
+
+<button onclick="addFlowers()">Add to Cart</button>
+</div>
+
+<!-- CANDLE -->
+<div class="card">
+<img id="candleImg" src="https://images.unsplash.com/photo-1602874801007-46baf8fbb20d">
+<h3>🕯 Scented Candle</h3>
+<p>Base Price: NPR 800</p>
+
+<select id="candleType" onchange="changeCandleImage()">
+<option value="lavender">Lavender</option>
+<option value="vanilla">Vanilla</option>
+<option value="rose">Rose</option>
+</select>
+
+<button onclick="addCandle()">Add to Cart</button>
+</div>
+
+</section>
+
+<section class="cart">
+<h2>🛒 Cart</h2>
+<ul id="cartList"></ul>
+<h3>Total: NPR <span id="total">0</span></h3>
+</section>
+
+<script>
+
+let total = 0;
+
+function addToCart(text, price){
+    let li = document.createElement("li");
+    li.innerText = text + " - NPR " + price;
+    document.getElementById("cartList").appendChild(li);
+    total += price;
+    document.getElementById("total").innerText = total;
+}
+
+/* CAKE IMAGE CHANGE */
+function changeCakeImage(){
+    let flavor = document.getElementById("cakeFlavor").value;
+    let img = document.getElementById("cakeImg");
+
+    if(flavor=="vanilla"){
+        img.src="https://images.unsplash.com/photo-1599785209707-28b09b6c2e27";
+    }
+    else if(flavor=="redvelvet"){
+        img.src="https://images.unsplash.com/photo-1605478900067-4f1f4f94a3e1";
+    }
+    else{
+        img.src="https://images.unsplash.com/photo-1578985545062-69928b1d9587";
+    }
+}
+
+function addCake(){
+    let flavor = document.getElementById("cakeFlavor").value;
+    let price = 1500;
+    if(flavor=="redvelvet") price+=200;
+    addToCart("Cake ("+flavor+")", price);
+}
+
+/* FLOWER IMAGE CHANGE */
+function changeFlowerImage(){
+    let type = document.getElementById("flowerType").value;
+    let img = document.getElementById("flowerImg");
+
+    if(type=="artificial"){
+        img.src="https://images.unsplash.com/photo-1590080874088-eec64895b423";
+    }
+    else{
+        img.src="https://images.unsplash.com/photo-1526045612212-70caf35c14df";
+    }
+}
+
+function addFlowers(){
+    let type = document.getElementById("flowerType").value;
+    let price = (type=="natural") ? 1000 : 800;
+    addToCart("Flowers ("+type+")", price);
+}
+
+/* CANDLE IMAGE CHANGE */
+function changeCandleImage(){
+    let type = document.getElementById("candleType").value;
+    let img = document.getElementById("candleImg");
+
+    if(type=="vanilla"){
+        img.src="https://images.unsplash.com/photo-1603006905003-be475563bc59";
+    }
+    else if(type=="rose"){
+        img.src="https://images.unsplash.com/photo-1602526219041-5f3cce2c5f52";
+    }
+    else{
+        img.src="https://images.unsplash.com/photo-1602874801007-46baf8fbb20d";
+    }
+}
+
+function addCandle(){
+    let type = document.getElementById("candleType").value;
+    let price = 800;
+    addToCart("Candle ("+type+")", price);
+}
+
+</script>
+
+</body>
+</html>
